@@ -4,5 +4,6 @@
 
 
 def rental_inventory():
-    with open('inventory.txt', 'w') as file:
-        file.write()
+    with open('inventory.txt') as file:
+        file.readlines()
+    return file.readlines
