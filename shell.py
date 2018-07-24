@@ -1,6 +1,6 @@
 # input() and print()
 # import core
-# import disk
+import disk
 
 
 def welcome():
@@ -11,40 +11,31 @@ def user_employee():
     while True:
         which = input('Are you a employee? Please type [y]es or [n]o. ').strip().lower()
         if which == 'y' or which == 'yes':
-
+            employee()
         if which == 'n' or which == 'no':
-
+            user()
         else:
             print('This is not an option. Please type [y]es or [n]o. ')
 
-
-def rental_inventory():
-    inventory = {
-        'Computer': {
-            'Price': 100,
-            'Sales Tax': .07,
-            'Replacement Fee': 500,
-            'Deposit': 50
-        },
-        'Book': {
-            'Price': 10,
-            'Sales Tax': .07,
-            'Replacement Fee': 20,
-            'Deposit': 2
-        },
-        'Movie': {
-            'Price': 5,
-            'Sales Tax': .07,
-            'Replacement Fee': 25,
-            'Deposit': 2.5
-        }
-    }
-
+def employee():
+    # see stock, review transaction history, calculate total revenue.
+    while True:
+        choice = input('Would you like to see [s]tock, review transaction [h]istory, or calculate [t]otal revenue? ')
+        if choice == 's':
+            stock()
+        elif choice == 'h':
+            history()
+        elif choice == 't':
+            total()
+        else:
+            print('This is not an option. Please type [s], [h], or [t]. ')
+def user():
+    # can rent and charge rates based on length of rentals.
 
 def main():
     welcome()
     user_employee()
-    rental_inventory()
+    
 
 
 if __name__ == '__main__':
