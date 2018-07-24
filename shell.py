@@ -29,8 +29,28 @@ def employee():
             total()
         else:
             print('This is not an option. Please type [s], [h], or [t]. ')
+
+def stock():
+
+def history():
+
+def choice():
+
+
 def user():
     # can rent and charge rates based on length of rentals.
+    while True:
+        choice = input('Would you like to rent or return? ')
+        if choice == 'rent':
+            rent()
+        elif choice == 'return':
+            bring_back()
+        else:
+            print('This is not an option. Please type rent or return. ')
+
+def rent():
+
+def bring_back():
 
 def main():
     welcome()
