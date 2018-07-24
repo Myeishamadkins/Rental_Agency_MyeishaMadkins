@@ -1,1 +1,20 @@
-
+inventory = {
+        'Computer': {
+            'Price': 100,
+            'Sales Tax': .07,
+            'Replacement Fee': 500,
+            'Deposit': 50
+        },
+        'Book': {
+            'Price': 10,
+            'Sales Tax': .07,
+            'Replacement Fee': 20,
+            'Deposit': 2
+        },
+        'Movie': {
+            'Price': 5,
+            'Sales Tax': .07,
+            'Replacement Fee': 25,
+            'Deposit': 2.5
+        }
+    }
