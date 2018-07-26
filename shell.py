@@ -1,6 +1,6 @@
 # input() and print()
-import core
-import disk
+# import core
+# import disk
 
 
 def welcome():
@@ -18,12 +18,31 @@ def user_employee():
             print('\n')
             user()
         else:
-            print('This is not an option. Please type [y]es or [n]o. ').strip(
-            ).lower()
+            print('This is not an option. Please type [y]es or [n]o. ')
 
 
 def open_inventory():
-    inventory = open_inventory
+    with open('inventory.txt') as file:
+        inventory = {}
+        for line in file:
+            name, price, replacement_fee, deposit, stock
+            item = {
+                'name': name,
+                'price': price,
+                'replacement fee': replacement_fee,
+                'deposit': deposit,
+                'stock': stock
+            }
+            inventory[name] = item
+    return inventory
+
+
+def save_my_inventory():
+    with open('inventory.txt', 'w') as file:
+        for item in inventory.values():
+            file.write('{},{}{}{}{}\n'.format(item[name], item[price],
+                                              item[replacement_fee],
+                                              item[deposit], item[stock]))
 
 
 def inventory_dictionary():
@@ -57,7 +76,7 @@ def employee():
     # see stock, review transaction history, calculate total revenue.
     while True:
         choice = input(
-            'Would you like to see [s]tock, review transaction [h]istory, calculate [t]otal revenue, or [e]xit? '
+            'Would you like to see [s]tock, review transaction [h]istory, calculate [t]otal revenue, [e]xit, or go [b]ack? '
         ).strip().lower()
         if choice == 's':
             print('\n')
@@ -70,25 +89,27 @@ def employee():
             total()
         elif choice == 'e':
             exit()
+        elif choice == 'b':
+            return
         else:
-            print('This is not an option. Please type [s], [h], or [t]. '
-                  ).strip().lower()
+            print('This is not an option. Please type [s], [h], or [t]. ')
 
 
 # def stock():
 
 
 def history():
-    with open("inventory.txt") as file:
+    with open("history.txt") as file:
         history = file.read()
     print(history)
 
 
 def total():
+    total = 0
     filename = './history.txt'
     with open(filename) as file:
-        history = file.read()
-        total = sum(history)
+        for line in file:
+            total += (float(line.strip()))
     print(total)
 
 
@@ -108,8 +129,8 @@ def user():
             print('\n')
             return
         else:
-            print('This is not an option. Please type rent or return. ').strip(
-            ).lower()
+            print(
+                'This is not an option. Please type rent, return, or [b]ack. ')
 
 
 def rent_function():
@@ -122,7 +143,7 @@ def rent_function():
         else:
             print(
                 'This is not an option. Please select [c]omputer, [m]ovie, or [b]ook. '
-            ).strip().lower()
+            )
 
 
 def rent(inventory):
@@ -136,25 +157,29 @@ def rent(inventory):
                 'The price of a computer is $100 + $0.07 sales tax with a $50 deposit. Your total price for renting a computer will be $150.07.'
             )
             keep = input(
-                'Would you like to rent a computer? Please type [y]es or [n]o. '
+                'Would you like to rent a computer? Please type [y]es, [n]o, or go [b]ack. '
             ).strip().lower()
             if keep == 'y':
                 with open("history.txt", "a") as file:
                     file.write('160.5')
                     file.write('\n')
                     print('\n')
-                    break
+                break
             elif keep == 'n':
                 break
+            elif keep == 'b':
+                return
             else:
-                print('This is not an option. Please type [y]es or [n]o.'
-                      ).strip().lower()
+                print(
+                    'This is not an option. Please type [y]es, [n]o, or go [b]ack.'
+                )
+
         if response == 'm':
             print(
                 'The price of a movie is $5 + $0.07 sales tax with a $2.5 deposit. Your total price for renting a movie will be $7.57.'
             )
             keep = input(
-                'Would you like to rent a movie? Please type [y]es or [n]o. '
+                'Would you like to rent a movie? Please type [y]es, [n]o, or go [b]ack. '
             ).strip().lower()
             if keep == 'y':
                 print('You have rented one movie for one week.')
@@ -165,15 +190,18 @@ def rent(inventory):
                     break
             elif keep == 'n':
                 break
+            elif keep == 'b':
+                return
             else:
-                print('This is not an option. Please type [y]es or [n]o.'
-                      ).strip().lower()
+                print(
+                    'This is not an option. Please type [y]es, [n]o, or go [b]ack.'
+                )
         if response == 'b':
             print(
                 'The price of a book is $10 + $0.07 sales tax with a $2 deposit. Your total price for renting a book will be $12.07.'
             )
             keep = input(
-                'Would you like to rent a book? Please type [y]es or [n]o. '
+                'Would you like to rent a book? Please type [y]es, [n]o, or go [b]ack. '
             ).strip().lower()
             if keep == 'y':
                 with open("history.txt", "a") as file:
@@ -183,9 +211,12 @@ def rent(inventory):
                     break
             elif keep == 'n':
                 break
+            elif keep == 'b':
+                return
             else:
-                print('This is not an option. Please type [y]es or [n]o.'
-                      ).strip().lower()
+                print(
+                    'This is not an option. Please type [y]es, [n]o, or go [b]ack.'
+                )
 
 
 # def bring_back():
