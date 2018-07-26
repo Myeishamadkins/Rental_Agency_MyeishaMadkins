@@ -21,30 +21,6 @@ def user_employee():
             print('This is not an option. Please type [y]es or [n]o. ')
 
 
-def open_inventory():
-    with open('inventory.txt') as file:
-        inventory = {}
-        for line in file:
-            name, price, replacement_fee, deposit, stock
-            item = {
-                'name': name,
-                'price': price,
-                'replacement fee': replacement_fee,
-                'deposit': deposit,
-                'stock': stock
-            }
-            inventory[name] = item
-    return inventory
-
-
-def save_my_inventory():
-    with open('inventory.txt', 'w') as file:
-        for item in inventory.values():
-            file.write('{},{}{}{}{}\n'.format(item[name], item[price],
-                                              item[replacement_fee],
-                                              item[deposit], item[stock]))
-
-
 def inventory_dictionary():
     inventory = {
         '1': {
@@ -95,7 +71,9 @@ def employee():
             print('This is not an option. Please type [s], [h], or [t]. ')
 
 
-# def stock():
+def stock(inventory_dictionary, item):
+    inventory_dictionary[item]['stock'] -= 1
+    return inventory_dictionary
 
 
 def history():
@@ -110,13 +88,13 @@ def total():
     with open(filename) as file:
         for line in file:
             total += (float(line.strip()))
-    print(total)
+    print(f'Total Revenue: ${total}!\n')
 
 
 def user():
     # can rent and charge rates based on length of rentals.
+    inventory = inventory_dictionary()
     while True:
-        inventory = inventory_dictionary()
         choice = input(
             'Would you like to rent, return, or go [b]ack? ').strip().lower()
         if choice == 'rent':
@@ -124,7 +102,7 @@ def user():
             rent(inventory)
         elif choice == 'return':
             print('\n')
-            bring_back()
+            bring_back(inventory)
         elif choice == 'b':
             print('\n')
             return
@@ -136,7 +114,7 @@ def user():
 def rent_function():
     while True:
         rent = input(
-            'Which item would you like to rent? a [c]omputer, a [m]ovie, or a [b]ook? '
+            'Which item would you like to rent? A [c]omputer, a [m]ovie, or a [b]ook? '
         ).lower().strip()
         if rent == 'c' or rent == 'm' or rent == 'b':
             return rent
@@ -164,6 +142,13 @@ def rent(inventory):
                     file.write('160.5')
                     file.write('\n')
                     print('\n')
+                with open('inventory.txt', 'w') as file:
+                    stock(inventory, '1')
+                    for item in inventory.values():
+                        file.write('{},{},{},{},{}'.format(
+                            item['name'], item['price'],
+                            item['replacement fee'], item['deposit'],
+                            item['stock']) + '\n')
                 break
             elif keep == 'n':
                 break
@@ -187,6 +172,13 @@ def rent(inventory):
                     file.write('8.57')
                     file.write('\n')
                     print('\n')
+                with open('inventory.txt', 'w') as file:
+                    stock(inventory, '2')
+                    for item in inventory.values():
+                        file.write('{},{},{},{},{}'.format(
+                            item['name'], item['price'],
+                            item['replacement fee'], item['deposit'],
+                            item['stock']) + '\n')
                     break
             elif keep == 'n':
                 break
@@ -208,6 +200,13 @@ def rent(inventory):
                     file.write('13.07')
                     file.write('\n')
                     print('\n')
+                with open('inventory.txt', 'w') as file:
+                    stock(inventory, '3')
+                    for item in inventory.values():
+                        file.write('{},{},{},{},{}'.format(
+                            item['name'], item['price'],
+                            item['replacement fee'], item['deposit'],
+                            item['stock']) + '\n')
                     break
             elif keep == 'n':
                 break
@@ -219,7 +218,35 @@ def rent(inventory):
                 )
 
 
-# def bring_back():
+def bring_back(inventory):
+    while True:
+        back = input(
+            'What would you like to return? A [c]omputer, a [m]ovie, or a [b]ook? '
+        )
+        if back == 'c':
+            replace_stock(inventory, '1')
+            with open('history.txt', 'a') as file:
+                file.write('-50')
+                file.write('\n')
+        elif back == 'm':
+            replace_stock(inventory, '2')
+            with open('history.txt', 'a') as file:
+                file.write('-2.5')
+                file.write('\n')
+        elif back == 'b':
+            replace_stock(inventory, '3')
+            with open('history.txt', 'a') as file:
+                file.write('-2')
+                file.write('\n')
+        else:
+            print(
+                'This is not an option. Please select A [c]omputer, a [m]ovie, or a [b]ook. '
+            )
+
+
+def replace_stock(inventory_dictionary, item):
+    inventory_dictionary[item]['stock'] += 1
+    return inventory_dictionary
 
 
 def main():
