@@ -23,11 +23,38 @@ def open_inventory():
     inventory = open_inventory
 
 
+def inventory_dictionary():
+    inventory = {
+        '1': {
+            'name': 'computer',
+            'price': 100,
+            'replacement fee': 500,
+            'deposit': 50,
+            'stock': 50
+        },
+        '2': {
+            'name': 'book',
+            'price': 10,
+            'replacement fee': 20,
+            'deposit': 2,
+            'stock': 100
+        },
+        '3': {
+            'name': 'movie',
+            'price': 5,
+            'replacement fee': 25,
+            'deposit': 2.5,
+            'stock': 70
+        }
+    }
+    return inventory
+
+
 def employee():
     # see stock, review transaction history, calculate total revenue.
     while True:
         choice = input(
-            'Would you like to see [s]tock, review transaction [h]istory, or calculate [t]otal revenue? '
+            'Would you like to see [s]tock, review transaction [h]istory, calculate [t]otal revenue, or [e]xit? '
         )
         if choice == 's':
             stock()
@@ -35,6 +62,8 @@ def employee():
             history()
         elif choice == 't':
             total()
+        elif choice == 'e':
+            exit()
         else:
             print('This is not an option. Please type [s], [h], or [t]. ')
 
@@ -48,15 +77,21 @@ def history():
     print(history)
 
 
-# def total():
+def total():
+    filename = './history.txt'
+    with open(filename) as file:
+        history = file.read()
+        total = sum(history)
+    print(total)
 
 
 def user():
     # can rent and charge rates based on length of rentals.
     while True:
+        inventory = inventory_dictionary()
         choice = input('Would you like to rent or return? ')
         if choice == 'rent':
-            rent()
+            rent(inventory)
         elif choice == 'return':
             bring_back()
         else:
@@ -76,8 +111,11 @@ def rent_function():
             )
 
 
-def rent():
+def rent(inventory):
     response = rent_function()
+    filename = './inventory.txt'
+    file_string = core.create_inventory_string(inventory)
+    disk.write_file(filename, file_string)
     while True:
         if response == 'c':
             print(
@@ -88,11 +126,10 @@ def rent():
             )
             if keep == 'y':
                 with open("history.txt", "a") as file:
-                    file.write('150.07')
+                    file.write('160.5')
                     file.write('\n')
-                    break
-            #  elif keep == 'n':
-            #     break
+            elif keep == 'n':
+                break
             else:
                 print('This is not an option. Please type [y]es or [n]o.')
         if response == 'm':
@@ -102,12 +139,12 @@ def rent():
             keep = input(
                 'Would you like to rent a movie? Please type [y]es or [n]o. ')
             if keep == 'y':
+                print('You have rented one movie for one week.')
                 with open("history.txt", "a") as file:
-                    file.write('7.57')
+                    file.write('8.57')
                     file.write('\n')
-                    break
-            # elif keep == 'n':
-            #     break
+            elif keep == 'n':
+                break
             else:
                 print('This is not an option. Please type [y]es or [n]o.')
         if response == 'b':
@@ -118,11 +155,11 @@ def rent():
                 'Would you like to rent a book? Please type [y]es or [n]o. ')
             if keep == 'y':
                 with open("history.txt", "a") as file:
-                    file.write('12.07')
+                    file.write('13.07')
                     file.write('\n')
                     break
-            # elif keep == 'n':
-            #     break
+            elif keep == 'n':
+                break
             else:
                 print('This is not an option. Please type [y]es or [n]o.')
 
@@ -131,9 +168,10 @@ def rent():
 
 
 def main():
+    filename = './inventory.txt'
     welcome()
     user_employee()
-    inventory = my_inventory()
+    inventory = inventory_dictionary()
     function = rent_function()
     get = rent()
 
