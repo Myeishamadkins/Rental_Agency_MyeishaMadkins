@@ -12,11 +12,14 @@ def user_employee():
         which = input(
             'Are you a employee? Please type [y]es or [n]o. ').strip().lower()
         if which == 'y' or which == 'yes':
+            print('\n')
             employee()
         if which == 'n' or which == 'no':
+            print('\n')
             user()
         else:
-            print('This is not an option. Please type [y]es or [n]o. ')
+            print('This is not an option. Please type [y]es or [n]o. ').strip(
+            ).lower()
 
 
 def open_inventory():
@@ -55,17 +58,21 @@ def employee():
     while True:
         choice = input(
             'Would you like to see [s]tock, review transaction [h]istory, calculate [t]otal revenue, or [e]xit? '
-        )
+        ).strip().lower()
         if choice == 's':
+            print('\n')
             stock()
         elif choice == 'h':
+            print('\n')
             history()
         elif choice == 't':
+            print('\n')
             total()
         elif choice == 'e':
             exit()
         else:
-            print('This is not an option. Please type [s], [h], or [t]. ')
+            print('This is not an option. Please type [s], [h], or [t]. '
+                  ).strip().lower()
 
 
 # def stock():
@@ -89,15 +96,20 @@ def user():
     # can rent and charge rates based on length of rentals.
     while True:
         inventory = inventory_dictionary()
-        choice = input('Would you like to rent, return, or go [b]ack? ')
+        choice = input(
+            'Would you like to rent, return, or go [b]ack? ').strip().lower()
         if choice == 'rent':
+            print('\n')
             rent(inventory)
         elif choice == 'return':
+            print('\n')
             bring_back()
         elif choice == 'b':
+            print('\n')
             return
         else:
-            print('This is not an option. Please type rent or return. ')
+            print('This is not an option. Please type rent or return. ').strip(
+            ).lower()
 
 
 def rent_function():
@@ -110,7 +122,7 @@ def rent_function():
         else:
             print(
                 'This is not an option. Please select [c]omputer, [m]ovie, or [b]ook. '
-            )
+            ).strip().lower()
 
 
 def rent(inventory):
@@ -125,47 +137,55 @@ def rent(inventory):
             )
             keep = input(
                 'Would you like to rent a computer? Please type [y]es or [n]o. '
-            )
+            ).strip().lower()
             if keep == 'y':
                 with open("history.txt", "a") as file:
                     file.write('160.5')
                     file.write('\n')
+                    print('\n')
                     break
             elif keep == 'n':
                 break
             else:
-                print('This is not an option. Please type [y]es or [n]o.')
+                print('This is not an option. Please type [y]es or [n]o.'
+                      ).strip().lower()
         if response == 'm':
             print(
                 'The price of a movie is $5 + $0.07 sales tax with a $2.5 deposit. Your total price for renting a movie will be $7.57.'
             )
             keep = input(
-                'Would you like to rent a movie? Please type [y]es or [n]o. ')
+                'Would you like to rent a movie? Please type [y]es or [n]o. '
+            ).strip().lower()
             if keep == 'y':
                 print('You have rented one movie for one week.')
                 with open("history.txt", "a") as file:
                     file.write('8.57')
                     file.write('\n')
+                    print('\n')
                     break
             elif keep == 'n':
                 break
             else:
-                print('This is not an option. Please type [y]es or [n]o.')
+                print('This is not an option. Please type [y]es or [n]o.'
+                      ).strip().lower()
         if response == 'b':
             print(
                 'The price of a book is $10 + $0.07 sales tax with a $2 deposit. Your total price for renting a book will be $12.07.'
             )
             keep = input(
-                'Would you like to rent a book? Please type [y]es or [n]o. ')
+                'Would you like to rent a book? Please type [y]es or [n]o. '
+            ).strip().lower()
             if keep == 'y':
                 with open("history.txt", "a") as file:
                     file.write('13.07')
                     file.write('\n')
+                    print('\n')
                     break
             elif keep == 'n':
                 break
             else:
-                print('This is not an option. Please type [y]es or [n]o.')
+                print('This is not an option. Please type [y]es or [n]o.'
+                      ).strip().lower()
 
 
 # def bring_back():
