@@ -89,11 +89,13 @@ def user():
     # can rent and charge rates based on length of rentals.
     while True:
         inventory = inventory_dictionary()
-        choice = input('Would you like to rent or return? ')
+        choice = input('Would you like to rent, return, or go [b]ack? ')
         if choice == 'rent':
             rent(inventory)
         elif choice == 'return':
             bring_back()
+        elif choice == 'b':
+            return
         else:
             print('This is not an option. Please type rent or return. ')
 
@@ -114,8 +116,8 @@ def rent_function():
 def rent(inventory):
     response = rent_function()
     filename = './inventory.txt'
-    file_string = core.create_inventory_string(inventory)
-    disk.write_file(filename, file_string)
+    # file_string = core.create_inventory_string(inventory)
+    # disk.write_file(filename, file_string)
     while True:
         if response == 'c':
             print(
@@ -128,6 +130,7 @@ def rent(inventory):
                 with open("history.txt", "a") as file:
                     file.write('160.5')
                     file.write('\n')
+                    break
             elif keep == 'n':
                 break
             else:
@@ -143,6 +146,7 @@ def rent(inventory):
                 with open("history.txt", "a") as file:
                     file.write('8.57')
                     file.write('\n')
+                    break
             elif keep == 'n':
                 break
             else:
