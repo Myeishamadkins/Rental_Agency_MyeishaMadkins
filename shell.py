@@ -7,13 +7,13 @@ def welcome():
     print("Welcome to Myeisha's Rental Agency!")
 
 
-def user_employee():
+def user_employee(inventory):
     while True:
         which = input(
             'Are you a employee? Please type [y]es or [n]o. ').strip().lower()
         if which == 'y' or which == 'yes':
             print('\n')
-            employee()
+            employee(inventory)
         if which == 'n' or which == 'no':
             print('\n')
             user()
@@ -48,7 +48,7 @@ def inventory_dictionary():
     return inventory
 
 
-def employee():
+def employee(inventory):
     # see stock, review transaction history, calculate total revenue.
     while True:
         choice = input(
@@ -56,7 +56,11 @@ def employee():
         ).strip().lower()
         if choice == 's':
             print('\n')
-            stock()
+            for item in inventory.values():
+                print('{}, {}, {}, {}, {}'.format(
+                    item['name'], item['price'], item['replacement fee'],
+                    item['deposit'], item['stock']))
+            print('\n')
         elif choice == 'h':
             print('\n')
             history()
@@ -88,7 +92,7 @@ def total():
     with open(filename) as file:
         for line in file:
             total += (float(line.strip()))
-    print(f'Total Revenue: ${total}!\n')
+    print(f'Total Revenue: ${round(total, 2)}!\n')
 
 
 def user():
@@ -126,13 +130,13 @@ def rent_function():
 
 def rent(inventory):
     response = rent_function()
-    filename = './inventory.txt'
+    # filename = './inventory.txt'
     # file_string = core.create_inventory_string(inventory)
     # disk.write_file(filename, file_string)
     while True:
         if response == 'c':
             print(
-                'The price of a computer is $100 + $0.07 sales tax with a $50 deposit. Your total price for renting a computer will be $150.07.'
+                'The price of a computer is $100 + $0.07 sales tax with a $50 deposit. Your total price for renting a computer will be $160.5.'
             )
             keep = input(
                 'Would you like to rent a computer? Please type [y]es, [n]o, or go [b]ack. '
@@ -145,7 +149,7 @@ def rent(inventory):
                 with open('inventory.txt', 'w') as file:
                     stock(inventory, '1')
                     for item in inventory.values():
-                        file.write('{},{},{},{},{}'.format(
+                        file.write('{}, {}, {}, {}, {}'.format(
                             item['name'], item['price'],
                             item['replacement fee'], item['deposit'],
                             item['stock']) + '\n')
@@ -161,7 +165,7 @@ def rent(inventory):
 
         if response == 'm':
             print(
-                'The price of a movie is $5 + $0.07 sales tax with a $2.5 deposit. Your total price for renting a movie will be $7.57.'
+                'The price of a movie is $5 + $0.07 sales tax with a $2.5 deposit. Your total price for renting a movie will be $8.57.'
             )
             keep = input(
                 'Would you like to rent a movie? Please type [y]es, [n]o, or go [b]ack. '
@@ -190,7 +194,7 @@ def rent(inventory):
                 )
         if response == 'b':
             print(
-                'The price of a book is $10 + $0.07 sales tax with a $2 deposit. Your total price for renting a book will be $12.07.'
+                'The price of a book is $10 + $0.07 sales tax with a $2 deposit. Your total price for renting a book will be $13.07.'
             )
             keep = input(
                 'Would you like to rent a book? Please type [y]es, [n]o, or go [b]ack. '
@@ -252,8 +256,8 @@ def replace_stock(inventory_dictionary, item):
 def main():
     filename = './inventory.txt'
     welcome()
-    user_employee()
     inventory = inventory_dictionary()
+    user_employee(inventory)
     function = rent_function()
     get = rent()
 
