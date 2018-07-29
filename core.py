@@ -1,18 +1,45 @@
 import disk
 
 
-def create_inventory_dictionary(inventory_list):
-    inventory_dictionary = {}
-    for inventory in inventory_list:
-        items = inventory.split(',')
-        key = items[0].strip()
-        value = int(items[1].strip())
-        inventory_dictionary[key] = value
+def inventory_dictionary():
+    inventory = {
+        '1': {
+            'name': 'computer',
+            'price': 100,
+            'replacement fee': 500,
+            'deposit': 50,
+            'stock': 50
+        },
+        '2': {
+            'name': 'book',
+            'price': 10,
+            'replacement fee': 20,
+            'deposit': 2,
+            'stock': 100
+        },
+        '3': {
+            'name': 'movie',
+            'price': 5,
+            'replacement fee': 25,
+            'deposit': 2.5,
+            'stock': 70
+        }
+    }
+    return inventory
+
+
+def employee_for(inventory):
+    for item in inventory.values():
+        print('{}, {}, {}, {}, {}'.format(item['name'], item['price'],
+                                          item['replacement fee'],
+                                          item['deposit'], item['stock']))
+
+
+def stock(inventory_dictionary, item):
+    inventory_dictionary[item]['stock'] -= 1
     return inventory_dictionary
 
 
-def create_inventory_string(inventory_dictionary):
-    file_string = 'name, price'
-    for name, price in inventory_dictionary():
-        file_string += '\n{}. {}'.format(name, price)
-    return file_string
+def replace_stock(inventory_dictionary, item):
+    inventory_dictionary[item]['stock'] += 1
+    return inventory_dictionary
