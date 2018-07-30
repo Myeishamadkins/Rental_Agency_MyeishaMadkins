@@ -81,7 +81,7 @@ def user():
             bring_back(inventory)
         elif choice == 'b':
             print('***************************************************')
-            return
+            return user_employee(inventory)
         else:
             print(
                 'This is not an option. Please type rent, return, or [b]ack. ')
@@ -183,7 +183,7 @@ def bring_back(inventory):
     while True:
         back = input(
             'What would you like to return? A [c]omputer, a [m]ovie, a [b]ook, or [g]o back? '
-        )
+        ).strip().lower()
         if back == 'c':
             replace_my_stock(inventory, '1')
             disk.c_bring_back()
