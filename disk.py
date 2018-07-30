@@ -29,7 +29,7 @@ def c_with_open_inventory():
     with open('inventory.txt', 'w') as file:
         core.stock(inventory, '1')
         for item in inventory.values():
-            file.write('{}, {}, {}, {}, {}'.format(
+            file.write('{},{},{},{},{}'.format(
                 item['name'], item['price'], item['replacement fee'],
                 item['deposit'], item['stock']) + '\n')
 
@@ -44,7 +44,7 @@ def m_with_open_history():
 def m_with_open_inventory():
     inventory = core.inventory_dictionary()
     with open('inventory.txt', 'w') as file:
-        stock(inventory, '2')
+        core.stock(inventory, '2')
         for item in inventory.values():
             file.write('{},{},{},{},{}'.format(
                 item['name'], item['price'], item['replacement fee'],
@@ -61,7 +61,7 @@ def b_with_open_history():
 def b_with_open_inventory():
     inventory = core.inventory_dictionary()
     with open('inventory.txt', 'w') as file:
-        stock(inventory, '3')
+        core.stock(inventory, '3')
         for item in inventory.values():
             file.write('{},{},{},{},{}'.format(
                 item['name'], item['price'], item['replacement fee'],

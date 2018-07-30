@@ -11,14 +11,16 @@ def welcome():
 
 def user_employee(inventory):
     while True:
-        which = input(
-            'Are you a employee? Please type [y]es or [n]o. ').strip().lower()
+        which = input('Are you a employee? Please type [y]es, [n]o or [e]xit. '
+                      ).strip().lower()
         if which == 'y' or which == 'yes':
             print('***************************************************')
             employee(inventory)
         if which == 'n' or which == 'no':
             print('***************************************************')
             user()
+        if which == 'e':
+            exit()
         else:
             print('This is not an option. Please type [y]es or [n]o. ')
 
@@ -46,7 +48,7 @@ def employee(inventory):
         elif choice == 'e':
             exit()
         elif choice == 'b':
-            return
+            return user_employee(inventory)
         else:
             print(
                 'This is not an option. Please type [s], [h], [t], [e], or [b]. '
@@ -86,6 +88,7 @@ def user():
 
 
 def rent_function():
+    inventory = core.inventory_dictionary
     while True:
         rent = input(
             'Which item would you like to rent? A [c]omputer, a [m]ovie, a [b]ook, or [g]o back? '
@@ -94,7 +97,7 @@ def rent_function():
         if rent == 'c' or rent == 'm' or rent == 'b':
             return rent
         elif rent == 'g':
-            return user_employee()
+            return user()
         else:
             print(
                 'This is not an option. Please select [c]omputer, [m]ovie, or [b]ook. '
@@ -141,7 +144,7 @@ def rent(inventory):
                 disk.m_with_open_history()
                 print('***************************************************')
                 print('\n')
-                disk.m_with_open_inventory
+                disk.m_with_open_inventory()
                 break
             elif keep == 'n':
                 break
@@ -184,16 +187,19 @@ def bring_back(inventory):
         if back == 'c':
             replace_my_stock(inventory, '1')
             disk.c_bring_back()
+            print('Here is your $50.00 deposit back.\nPlease come again!')
             print('***************************************************')
             return
         elif back == 'm':
             replace_my_stock(inventory, '2')
             disk.m_bring_back()
+            print('Here is your $2.50 deposit back.\nPlease come again!')
             print('***************************************************')
             return
         elif back == 'b':
             replace_my_stock(inventory, '3')
             disk.b_bring_back()
+            print('Here is your $2.00 deposit back.\nPlease come again!')
             print('***************************************************')
             return
         elif back == 'g':
