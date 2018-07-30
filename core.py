@@ -43,3 +43,8 @@ def stock(inventory_dictionary, item):
 def replace_stock(inventory_dictionary, item):
     inventory_dictionary[item]['stock'] += 1
     return inventory_dictionary
+
+
+def zero_in_stock(inventory, item):
+    if inventory[item]['stock'] == 0:
+        return True
