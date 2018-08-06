@@ -26,7 +26,7 @@ def user_employee(inventory):
 
 
 def my_inventory():
-    core.inventory_dictionary()
+    disk.make_inventory_dictionary(inventory_list)
 
 
 def employee(inventory):
@@ -69,7 +69,8 @@ def my_total():
 
 def user():
     # can rent and charge rates based on length of rentals.
-    inventory = core.inventory_dictionary()
+    inventory_list = disk.open_my_inventory()
+    inventory = disk.make_inventory_dictionary(inventory_list)
     while True:
         choice = input(
             'Would you like to rent, return, or go [b]ack? ').strip().lower()
@@ -88,7 +89,8 @@ def user():
 
 
 def rent_function():
-    inventory = core.inventory_dictionary
+    inventory_list = disk.open_my_inventory()
+    inventory_dictionary = disk.make_inventory_dictionary(inventory_list)
     while True:
         rent = input(
             'Which item would you like to rent? A [c]omputer, a [m]ovie, a [b]ook, or [g]o back? '
@@ -117,10 +119,11 @@ def rent(inventory):
             ).strip().lower()
             if keep == 'y':
                 print('You have rented one computer for one week.')
-                disk.c_with_open_history()
+                total = 160.5
+                disk.write_history(total)
                 print('***************************************************')
                 print('\n')
-                disk.c_with_open_inventory()
+                disk.open_my_inventory()
                 break
             elif keep == 'n':
                 break
@@ -141,10 +144,11 @@ def rent(inventory):
             ).strip().lower()
             if keep == 'y':
                 print('You have rented one movie for one week.')
-                disk.m_with_open_history()
+                total = 8.57
+                disk.write_history(total)
                 print('***************************************************')
                 print('\n')
-                disk.m_with_open_inventory()
+                disk.open_my_inventory()
                 break
             elif keep == 'n':
                 break
@@ -164,10 +168,11 @@ def rent(inventory):
             ).strip().lower()
             if keep == 'y':
                 print('You have rented one book for one week.')
-                disk.b_with_open_history()
+                total = 13.07
+                disk.write_history(total)
                 print('***************************************************')
                 print('\n')
-                disk.b_with_open_inventory()
+                disk.open_my_inventory()
                 break
             elif keep == 'n':
                 break
@@ -180,25 +185,31 @@ def rent(inventory):
 
 
 def bring_back(inventory):
+    inventory_information = disk.open_my_inventory()
+    inventory_dictionary = disk.make_inventory_dictionary(
+        inventory_information)
     while True:
         back = input(
             'What would you like to return? A [c]omputer, a [m]ovie, a [b]ook, or [g]o back? '
         ).strip().lower()
         if back == 'c':
-            replace_my_stock(inventory, '1')
-            disk.c_bring_back()
+            replace_my_stock(inventory_dictionary, 'computer')
+            total = -50
+            disk.write_history(total)
             print('Here is your $50.00 deposit back.\nPlease come again!')
             print('***************************************************')
             return
         elif back == 'm':
-            replace_my_stock(inventory, '2')
-            disk.m_bring_back()
+            replace_my_stock(inventory_dictionary, 'm')
+            total = -2.5
+            disk.write_history(total)
             print('Here is your $2.50 deposit back.\nPlease come again!')
             print('***************************************************')
             return
         elif back == 'b':
-            replace_my_stock(inventory, '3')
-            disk.b_bring_back()
+            replace_my_stock(inventory_dictionary, 'b')
+            total = -2
+            disk.write_history(total)
             print('Here is your $2.00 deposit back.\nPlease come again!')
             print('***************************************************')
             return
@@ -217,7 +228,8 @@ def replace_my_stock(inventory_dictionary, item):
 def main():
     filename = './inventory.txt'
     welcome()
-    inventory = core.inventory_dictionary()
+    inventory_list = disk.open_my_inventory()
+    inventory = disk.make_inventory_dictionary(inventory_list)
     user_employee(inventory)
     function = rent_function()
     get = rent()
