@@ -108,6 +108,8 @@ def rent_function():
 
 def rent(inventory):
     response = rent_function()
+    inventory_list = disk.open_my_inventory()
+    inventory_dictionary = disk.make_inventory_dictionary(inventory_list)
     while True:
         if response == 'c':
             print(
@@ -123,7 +125,8 @@ def rent(inventory):
                 disk.write_history(total)
                 print('***************************************************')
                 print('\n')
-                disk.open_my_inventory()
+                core.stock(inventory_dictionary, 'computer')
+                disk.write_inventory(inventory_dictionary)
                 break
             elif keep == 'n':
                 break
@@ -148,7 +151,7 @@ def rent(inventory):
                 disk.write_history(total)
                 print('***************************************************')
                 print('\n')
-                disk.open_my_inventory()
+                disk.write_inventory(inventory_dictionary)
                 break
             elif keep == 'n':
                 break
@@ -172,7 +175,7 @@ def rent(inventory):
                 disk.write_history(total)
                 print('***************************************************')
                 print('\n')
-                disk.open_my_inventory()
+                disk.write_inventory(inventory_dictionary)
                 break
             elif keep == 'n':
                 break
@@ -196,20 +199,23 @@ def bring_back(inventory):
             replace_my_stock(inventory_dictionary, 'computer')
             total = -50
             disk.write_history(total)
+            disk.write_inventory(inventory_dictionary)
             print('Here is your $50.00 deposit back.\nPlease come again!')
             print('***************************************************')
             return
         elif back == 'm':
-            replace_my_stock(inventory_dictionary, 'm')
+            replace_my_stock(inventory_dictionary, 'movie')
             total = -2.5
             disk.write_history(total)
+            disk.write_inventory(inventory_dictionary)
             print('Here is your $2.50 deposit back.\nPlease come again!')
             print('***************************************************')
             return
         elif back == 'b':
-            replace_my_stock(inventory_dictionary, 'b')
+            replace_my_stock(inventory_dictionary, 'book')
             total = -2
             disk.write_history(total)
+            disk.write_inventory(inventory_dictionary)
             print('Here is your $2.00 deposit back.\nPlease come again!')
             print('***************************************************')
             return
