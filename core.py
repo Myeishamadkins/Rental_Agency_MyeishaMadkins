@@ -1,31 +1,25 @@
 import disk
 
+# def make_inventory_dictionary(inventory_list):
+#     inventory_dictionary = {}
+#     for inventory in inventory_dictionary:
+#         items = inventory.split(',')
+#         name = items[0].split()
+#         stock = int(items[1].strip())
+#         price = float(items[2].strip())
+#         replacement_fee = int(items[3].strip())
+#         inventory_dictionary[name] = {
+#             'name': name,
+#             'price': price,
+#             'replacement fee': replacement_fee,
+#             'stock': stock
+#         }
+#     return inventory_dictionary
 
-def inventory_dictionary():
-    inventory = {
-        '1': {
-            'name': 'computer',
-            'price': 100,
-            'replacement fee': 500,
-            'deposit': 50,
-            'stock': 50
-        },
-        '2': {
-            'name': 'book',
-            'price': 10,
-            'replacement fee': 20,
-            'deposit': 2,
-            'stock': 100
-        },
-        '3': {
-            'name': 'movie',
-            'price': 5,
-            'replacement fee': 25,
-            'deposit': 2.5,
-            'stock': 70
-        }
-    }
-    return inventory
+# def open_my_inventory():
+#     with open('inventory.txt') as file:
+#         new_file_info = file.readlines()
+#     return new_file_info
 
 
 def employee_for(inventory):
@@ -36,12 +30,14 @@ def employee_for(inventory):
 
 
 def stock(inventory_dictionary, item):
-    inventory_dictionary[item]['stock'] -= 1
+    if item in inventory_dictionary.keys():
+        inventory_dictionary[item]['stock'] -= 1
     return inventory_dictionary
 
 
 def replace_stock(inventory_dictionary, item):
-    inventory_dictionary[item]['stock'] += 1
+    if item in inventory_dictionary.keys():
+        inventory_dictionary[item]['stock'] += 1
     return inventory_dictionary
 
 
