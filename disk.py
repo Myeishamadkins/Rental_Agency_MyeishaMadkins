@@ -2,6 +2,41 @@
 import core
 
 
+def make_inventory_dictionary(inventory_list):
+    inventory_dictionary = {}
+    for inventory in inventory_dictionary:
+        items = inventory.split(',')
+        name = items[0].split()
+        stock = int(items[1].strip())
+        price = float(items[2].strip())
+        replacement_fee = int(items[3].strip())
+        inventory_dictionary[name] = {
+            'name': name,
+            'price': price,
+            'replacement fee': replacement_fee,
+            'stock': stock
+        }
+    return inventory_dictionary
+
+
+def open_my_inventory():
+    with open('inventory.txt') as file:
+        new_file_info = file.readlines()
+    return new_file_info
+
+
+def write_inventory(inventory_dictionary):
+    with open('inventory.txt', 'w') as file:
+        inventory_string = make_inventory_string(inventory_dictionary)
+        file.write(inventory_string)
+
+
+def write_history(total):
+    with open('history.txt', 'a') as file:
+        file.write(str(total))
+        file.write('\n')
+
+
 def history():
     with open("history.txt") as file:
         history = file.read()
@@ -14,73 +49,5 @@ def total():
     with open(filename) as file:
         for line in file:
             total += (float(line.strip()))
-    print(f'Total Revenue: ${round(total, 2)}!\n')
-
-
-def c_with_open_history():
-    inventory = core.inventory_dictionary()
-    with open("history.txt", "a") as file:
-        file.write('160.5')
-        file.write('\n')
-
-
-def c_with_open_inventory():
-    inventory = core.inventory_dictionary()
-    with open('inventory.txt', 'w') as file:
-        core.stock(inventory, '1')
-        for item in inventory.values():
-            file.write('{},{},{},{},{}'.format(
-                item['name'], item['price'], item['replacement fee'],
-                item['deposit'], item['stock']) + '\n')
-
-
-def m_with_open_history():
-    inventory = core.inventory_dictionary()
-    with open("history.txt", "a") as file:
-        file.write('8.57')
-        file.write('\n')
-
-
-def m_with_open_inventory():
-    inventory = core.inventory_dictionary()
-    with open('inventory.txt', 'w') as file:
-        core.stock(inventory, '2')
-        for item in inventory.values():
-            file.write('{},{},{},{},{}'.format(
-                item['name'], item['price'], item['replacement fee'],
-                item['deposit'], item['stock']) + '\n')
-
-
-def b_with_open_history():
-    inventory = core.inventory_dictionary()
-    with open("history.txt", "a") as file:
-        file.write('13.07')
-        file.write('\n')
-
-
-def b_with_open_inventory():
-    inventory = core.inventory_dictionary()
-    with open('inventory.txt', 'w') as file:
-        core.stock(inventory, '3')
-        for item in inventory.values():
-            file.write('{},{},{},{},{}'.format(
-                item['name'], item['price'], item['replacement fee'],
-                item['deposit'], item['stock']) + '\n')
-
-
-def c_bring_back():
-    with open('history.txt', 'a') as file:
-        file.write('-50')
-        file.write('\n')
-
-
-def m_bring_back():
-    with open('history.txt', 'a') as file:
-        file.write('-2.5')
-        file.write('\n')
-
-
-def b_bring_back():
-    with open('history.txt', 'a') as file:
-        file.write('-2')
-        file.write('\n')
+    print(f'\nTotal Revenue: ${round(total, 2)}!\n')
+    print('***************************************************')
