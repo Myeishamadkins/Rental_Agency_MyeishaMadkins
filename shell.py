@@ -1,6 +1,7 @@
 # input() and print()
 import core
 import disk
+from time import sleep
 
 
 def welcome():
@@ -20,6 +21,13 @@ def user_employee(inventory):
             print('***************************************************')
             user()
         if which == 'e':
+            print('\nExiting...')
+            sleep(3)
+            print('Exiting.....')
+            sleep(2)
+            print('Exiting.......\n')
+            sleep(1)
+            print('Goodbye, come again soon!')
             exit()
         else:
             print('This is not an option. Please type [y]es or [n]o. ')
