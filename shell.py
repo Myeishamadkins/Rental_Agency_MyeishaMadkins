@@ -96,9 +96,7 @@ def user():
                 'This is not an option. Please type rent, return, or [b]ack. ')
 
 
-def rent_function():
-    inventory_list = disk.open_my_inventory()
-    inventory_dictionary = disk.make_inventory_dictionary(inventory_list)
+def rent_function(inventory):
     while True:
         rent = input(
             'Which item would you like to rent? A [c]omputer, a [m]ovie, a [b]ook, or [g]o back? '
@@ -115,9 +113,7 @@ def rent_function():
 
 
 def rent(inventory):
-    response = rent_function()
-    inventory_list = disk.open_my_inventory()
-    inventory_dictionary = disk.make_inventory_dictionary(inventory_list)
+    response = rent_function(inventory)
     while True:
         if response in response:
             print('Your total price will be $160.5.')
