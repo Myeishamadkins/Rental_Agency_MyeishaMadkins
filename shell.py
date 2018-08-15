@@ -111,10 +111,8 @@ def rent(inventory):
     inventory_list = disk.open_my_inventory()
     inventory_dictionary = disk.make_inventory_dictionary(inventory_list)
     while True:
-        if response == 'c':
-            print(
-                'The price of a computer is $100 + $0.07 sales tax with a $50 deposit. Your total price for renting a computer will be $160.5.'
-            )
+        if response in response:
+            print('Your total price will be $160.5.')
             print('***************************************************')
             keep = input(
                 'Would you like to rent a computer? Please type [y]es, [n]o, or go [b]ack. '
@@ -137,10 +135,8 @@ def rent(inventory):
                     'This is not an option. Please type [y]es, [n]o, or go [b]ack.'
                 )
 
-        if response == 'm':
-            print(
-                'The price of a movie is $5 + $0.07 sales tax with a $2.5 deposit. Your total price for renting a movie will be $8.57.'
-            )
+        if response in response:
+            print('Your total price will be $8.57.')
             print('***************************************************')
             keep = input(
                 'Would you like to rent a movie? Please type [y]es, [n]o, or go [b]ack. '
@@ -161,10 +157,8 @@ def rent(inventory):
                 print(
                     'This is not an option. Please type [y]es, [n]o, or go [b]ack.'
                 )
-        if response == 'b':
-            print(
-                'The price of a book is $10 + $0.07 sales tax with a $2 deposit. Your total price for renting a book will be $13.07.'
-            )
+        if response in response:
+            print('Your total price will be $13.07.')
             print('***************************************************')
             keep = input(
                 'Would you like to rent a book? Please type [y]es, [n]o, or go [b]ack. '
@@ -195,28 +189,28 @@ def bring_back(inventory):
         back = input(
             'What would you like to return? A [c]omputer, a [m]ovie, a [b]ook, or [g]o back? '
         ).strip().lower()
-        if back == 'c':
+        if back in back:
             replace_my_stock(inventory_dictionary, 'computer')
             total = -50
             disk.write_history(total)
             disk.write_inventory(inventory_dictionary)
-            print('Here is your $50.00 deposit back.\nPlease come again!')
+            print('Here is your $50.00 deposit back.\nPlease come again!\n\n')
             print('***************************************************')
             return
-        elif back == 'm':
+        elif back in back:
             replace_my_stock(inventory_dictionary, 'movie')
             total = -2.5
             disk.write_history(total)
             disk.write_inventory(inventory_dictionary)
-            print('Here is your $2.50 deposit back.\nPlease come again!')
+            print('Here is your $2.50 deposit back.\nPlease come again!\n\n')
             print('***************************************************')
             return
-        elif back == 'b':
+        elif back in back:
             replace_my_stock(inventory_dictionary, 'book')
             total = -2
             disk.write_history(total)
             disk.write_inventory(inventory_dictionary)
-            print('Here is your $2.00 deposit back.\nPlease come again!')
+            print('Here is your $2.00 deposit back.\nPlease come again!\n\n')
             print('***************************************************')
             return
         elif back == 'g':
