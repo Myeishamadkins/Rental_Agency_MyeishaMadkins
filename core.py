@@ -8,8 +8,8 @@ def make_inventory_string(inventory_dictionary):
         price = value['price']
         replacement_fee = value['replacement fee']
         stock = value['stock']
-        inventory_string += '{}, {}, {}, {},\n'.format(name, price,
-                                                       replacement_fee, stock)
+        inventory_string += '{}, {}, {}, {}\n'.format(name, price,
+                                                      replacement_fee, stock)
     return inventory_string
 
 
@@ -34,3 +34,14 @@ def replace_stock(inventory_dictionary, item):
 def zero_in_stock(inventory, item):
     if inventory[item]['stock'] == 0:
         return True
+
+
+# def rent_item(inventory, item, days):
+#     name = inventory[item]['name']
+#     price = inventory[item]['price']
+#     print('you are renting a {} for ${} a day for {} days.').format(name, price, days)
+#     cost = price * days
+#     tax = cost * 1.07
+#     deposit = inventory[item]['replacement'] * 0.10
+#     inventory[item]['quantity'] -= 1
+#     return cost, tax, deposit
