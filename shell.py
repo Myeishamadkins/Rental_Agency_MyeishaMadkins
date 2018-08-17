@@ -10,31 +10,33 @@ def welcome():
     print('All items are rented for one week with a set price.')
 
 
-def user_employee(inventory):
+def leave_store():
+    print('\nExiting...')
+    sleep(3)
+    print('Exiting.....')
+    sleep(2)
+    print('Exiting.......\n')
+    sleep(1)
+    print('Goodbye, come again soon!')
+    exit()
+
+
+def user_employee():
     while True:
         which = input('Are you a employee? Please type [y]es, [n]o or [e]xit. '
                       ).strip().lower()
         if which == 'y' or which == 'yes':
             print('***************************************************')
-            employee(inventory)
-        if which == 'n' or which == 'no':
+            print('\n')
+            return 'employee'
+        elif which == 'n' or which == 'no':
             print('***************************************************')
-            user()
-        if which == 'e':
-            print('\nExiting...')
-            sleep(3)
-            print('Exiting.....')
-            sleep(2)
-            print('Exiting.......\n')
-            sleep(1)
-            print('Goodbye, come again soon!')
-            exit()
+            print('\n')
+            return 'customer'
+        elif which == 'e':
+            return 'exit'
         else:
             print('This is not an option. Please type [y]es or [n]o. ')
-
-
-def my_inventory():
-    disk.make_inventory_dictionary(inventory_list)
 
 
 def employee(inventory):
@@ -45,22 +47,31 @@ def employee(inventory):
         ).strip().lower()
         if choice == 's':
             print('***************************************************')
-            core.employee_for(inventory)
+            employee_for(inventory)
+            print('\n')
             print('***************************************************')
         elif choice == 'h':
             print('***************************************************')
             my_history()
+            print('\n')
         elif choice == 't':
             print('***************************************************')
             my_total()
+            print('\n')
         elif choice == 'e':
             exit()
         elif choice == 'b':
-            return user_employee(inventory)
+            break
         else:
             print(
                 'This is not an option. Please type [s], [h], [t], [e], or [b]. '
             )
+
+
+def employee_for(inventory):
+    for item in inventory.values():
+        print('{}, {}, {}, {}'.format(item['name'], item['price'],
+                                      item['replacement fee'], item['stock']))
 
 
 def my_stock(inventory_dictionary, item):
@@ -73,156 +84,95 @@ def my_history():
 
 def my_total():
     disk.total()
+    print('***************************************************')
 
 
-def user():
+def user(inventory, money):
     # can rent and charge rates based on length of rentals.
-    inventory_list = disk.open_my_inventory()
-    inventory = disk.make_inventory_dictionary(inventory_list)
     while True:
         choice = input(
             'Would you like to rent, return, or go [b]ack? ').strip().lower()
         if choice == 'rent':
             print('***************************************************')
-            rent(inventory)
+            rent(inventory, money)
+            print('\n')
         elif choice == 'return':
             print('***************************************************')
-            bring_back(inventory)
+            bring_back(inventory, money)
+            print('\n')
         elif choice == 'b':
             print('***************************************************')
-            return user_employee(inventory)
+            break
         else:
             print(
                 'This is not an option. Please type rent, return, or [b]ack. ')
 
 
-def rent_function(inventory):
+def printable_inventory(inventory):
+    for key in inventory:
+        print('name: {}, key: {}, price: {}, stock: {}'.format(
+            inventory[key]['name'], key, inventory[key]['price'],
+            inventory[key]['stock']))
+
+
+def get_item(inventory):
     while True:
-        rent = input(
-            'Which item would you like to rent? A [c]omputer, a [m]ovie, a [b]ook, or [g]o back? '
+        printable_inventory(inventory)
+        response = input(
+            'Which item would you like to rent? Please enter key name. '
         ).lower().strip()
         print('***************************************************')
-        if rent == 'c' or rent == 'm' or rent == 'b':
-            return rent
-        elif rent == 'g':
-            return user()
+        if response in inventory:
+            if core.in_stock(inventory, response):
+                return response
+            else:
+                print('that item is out of stock! womp womp')
         else:
-            print(
-                'This is not an option. Please select [c]omputer, [m]ovie, or [b]ook. '
-            )
+            print('invalid choice')
 
 
-def rent(inventory):
-    response = rent_function(inventory)
+def rent(inventory, money):
+    response = get_item(inventory)
+    total = inventory[response]['price']
+    print('Your total price will be ${:.2f}.'.format(total))
+    keep = input(
+        'Would you like to rent this item? Please type [y]es or [n]o. ').strip(
+        ).lower()
+    if keep == 'y':
+        print(
+            f"You have rented one {inventory[response]['name']} for one week.")
+        history_string = core.make_history_string(inventory, response,
+                                                  'Rented')
+        core.remove_from_stock(inventory, response)
+        disk.write_inventory(inventory)
+        disk.write_history(history_string)
+        core.add_money(money, total)
+        money_string = core.make_money_string(money)
+        disk.write_money(money_string)
+        print('***************************************************')
+        print('\n')
+
+
+def bring_back(inventory, money):
     while True:
-        if response in response:
-            print('Your total price will be $160.5.')
-            print('***************************************************')
-            keep = input(
-                'Would you like to rent a computer? Please type [y]es, [n]o, or go [b]ack. '
-            ).strip().lower()
-            if keep == 'y':
-                print('You have rented one computer for one week.')
-                total = 160.5
-                disk.write_history(total)
-                print('***************************************************')
-                print('\n')
-                core.stock(inventory_dictionary, 'computer')
-                disk.write_inventory(inventory_dictionary)
-                break
-            elif keep == 'n':
-                break
-            elif keep == 'b':
-                return
-            else:
-                print(
-                    'This is not an option. Please type [y]es, [n]o, or go [b]ack.'
-                )
-
-        if response in response:
-            print('Your total price will be $8.57.')
-            print('***************************************************')
-            keep = input(
-                'Would you like to rent a movie? Please type [y]es, [n]o, or go [b]ack. '
-            ).strip().lower()
-            if keep == 'y':
-                print('You have rented one movie for one week.')
-                total = 8.57
-                disk.write_history(total)
-                print('***************************************************')
-                print('\n')
-                disk.write_inventory(inventory_dictionary)
-                break
-            elif keep == 'n':
-                break
-            elif keep == 'b':
-                return
-            else:
-                print(
-                    'This is not an option. Please type [y]es, [n]o, or go [b]ack.'
-                )
-        if response in response:
-            print('Your total price will be $13.07.')
-            print('***************************************************')
-            keep = input(
-                'Would you like to rent a book? Please type [y]es, [n]o, or go [b]ack. '
-            ).strip().lower()
-            if keep == 'y':
-                print('You have rented one book for one week.')
-                total = 13.07
-                disk.write_history(total)
-                print('***************************************************')
-                print('\n')
-                disk.write_inventory(inventory_dictionary)
-                break
-            elif keep == 'n':
-                break
-            elif keep == 'b':
-                return
-            else:
-                print(
-                    'This is not an option. Please type [y]es, [n]o, or go [b]ack.'
-                )
-
-
-def bring_back(inventory):
-    inventory_information = disk.open_my_inventory()
-    inventory_dictionary = disk.make_inventory_dictionary(
-        inventory_information)
-    while True:
-        back = input(
-            'What would you like to return? A [c]omputer, a [m]ovie, a [b]ook, or [g]o back? '
-        ).strip().lower()
-        if back in back:
-            replace_my_stock(inventory_dictionary, 'computer')
-            total = -50
-            disk.write_history(total)
-            disk.write_inventory(inventory_dictionary)
-            print('Here is your $50.00 deposit back.\nPlease come again!\n\n')
-            print('***************************************************')
-            return
-        elif back in back:
-            replace_my_stock(inventory_dictionary, 'movie')
-            total = -2.5
-            disk.write_history(total)
-            disk.write_inventory(inventory_dictionary)
-            print('Here is your $2.50 deposit back.\nPlease come again!\n\n')
-            print('***************************************************')
-            return
-        elif back in back:
-            replace_my_stock(inventory_dictionary, 'book')
-            total = -2
-            disk.write_history(total)
-            disk.write_inventory(inventory_dictionary)
-            print('Here is your $2.00 deposit back.\nPlease come again!\n\n')
-            print('***************************************************')
-            return
-        elif back == 'g':
-            return
+        printable_inventory(inventory)
+        response = input(
+            'What would you like to return? [g]o back? ').strip().lower()
+        if response == 'g':
+            return user(inventory, money)
+            print('\n')
+        elif response in inventory:
+            core.replace_stock(inventory, response)
+            deposit = inventory[response]['replacement fee'] * .10
+            history_string = core.make_history_string(inventory, response,
+                                                      'Returned')
+            core.replace_stock(inventory, response)
+            disk.write_history(history_string)
+            core.take_away_money(money, deposit)
+            money_string = core.make_money_string(money)
+            disk.write_money(money_string)
         else:
-            print(
-                'This is not an option. Please select A [c]omputer, a [m]ovie, a [b]ook, or [g]o back. '
-            )
+            print('This is not an option. [g]o back. ')
 
 
 def replace_my_stock(inventory_dictionary, item):
@@ -233,10 +183,17 @@ def main():
     filename = './inventory.txt'
     welcome()
     inventory_list = disk.open_my_inventory()
-    inventory = disk.make_inventory_dictionary(inventory_list)
-    user_employee(inventory)
-    function = rent_function()
-    get = rent()
+    inventory = core.make_inventory_dictionary(inventory_list)
+    money_list = disk.open_money()
+    money = core.make_money_dictionary(money_list)
+    while True:
+        decision = user_employee()
+        if decision == 'employee':
+            employee(inventory)
+        elif decision == 'customer':
+            user(inventory, money)
+        elif decision == 'exit':
+            leave_store()
 
 
 if __name__ == '__main__':

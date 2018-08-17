@@ -1,3 +1,4 @@
-computer, 100, 500, 49
-book, 10, 20, 102
-movie, 5, 25, 71
+c, computer, 100, 500, 25
+m, movie, 5, 25, 66
+b, book, 10, 20, 94
+g, game, 20, 25, 0

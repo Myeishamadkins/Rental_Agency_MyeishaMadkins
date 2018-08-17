@@ -2,24 +2,6 @@
 import core
 
 
-def make_inventory_dictionary(inventory_list):
-    inventory_dictionary = {}
-    for inventory in inventory_list:
-        items = inventory.split(',')
-        name = items[0].strip()
-        price = int(items[1].strip())
-        replacement_fee = int(items[2].strip())
-        stock = int(items[3].strip())
-        inventory_dictionary[name] = {
-            'name': name,
-            'price': price,
-            'replacement fee': replacement_fee,
-            'stock': stock
-        }
-
-    return inventory_dictionary
-
-
 def open_my_inventory():
     with open('inventory.txt') as file:
         new_file_info = file.readlines()
@@ -32,10 +14,9 @@ def write_inventory(inventory_dictionary):
         file.write(inventory_string)
 
 
-def write_history(total):
+def write_history(string):
     with open('history.txt', 'a') as file:
-        file.write(str(total))
-        file.write('\n')
+        file.write(string)
 
 
 def history():
@@ -44,11 +25,20 @@ def history():
     print(history)
 
 
+def open_money():
+    with open('money.txt') as file:
+        money = file.readlines()
+    return money
+
+
+def write_money(string):
+    with open('money.txt', 'w') as file:
+        file.write(string)
+
+
 def total():
     total = 0
-    filename = './history.txt'
+    filename = './money.txt'
     with open(filename) as file:
-        for line in file:
-            total += (float(line.strip()))
-    print(f'\nTotal Revenue: ${round(total, 2)}!\n')
-    print('***************************************************')
+        money = file.read()
+    print(money)

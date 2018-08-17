@@ -1,86 +1,121 @@
-160.5
-8.57
-8.57
-160.5
-8.57
-13.07
--50
-160.5
-160.5
-160.5
-8.57
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-8.57
-13.07
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
--50
--50
--50
--50
-160.5
-8.57
-13.07
--50
--2.5
--2
-160.5
-8.57
-13.07
--50
--2.5
--2
-160.5
-160.5
-160.5
-160.5
-160.5
-160.5
--50
--50
--50
--50
--50
-160.5
-160.5
-160.5
--50
--50
--50
+
+book, Returned
+computer, Returned
+movie, Returned
+movie, Returned
+movie, Returned
+book, Returned
+computer, Returned
+computer, Returned
+game, Returned
+game, Returned
+game, Returned
+game, Returned
+game, Returned
+game, Returned
+game, Returned
+computer, Returned
+computer, Returned
+movie, Rented
+movie, Rented
+movie, Rented
+book, Rented
+movie, Returned
+book, Returned
+game, Returned
+computer, Returned
+game, Returned
+game, Returned
+computer, Rented
+computer, Rented
+computer, Rented
+movie, Rented
+computer, Rented
+computer, Rented
+computer, Rented
+computer, Rented
+computer, Rented
+computer, Rented
+computer, Rented
+movie, Rented
+computer, Rented
+computer, Rented
+book, Rented
+movie, Rented
+ computer, Rented
+ movie, Rented
+ book, Rented
+  computer, Rented
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  computer, Returned
+  game, Returned
+  game, Returned
+  game, Returned
+  game, Returned
+  game, Returned
+  game, Returned
+   computer, Returned
+   computer, Returned
+   computer, Returned
+computer, Rented
+computer, Returned
+game, Returned
+game, Returned
+game, Returned
+game, Returned
+game, Returned
+computer, Rented
+movie, Rented
+computer, Rented
+movie, Rented
+computer, Returned
+computer, Returned
+computer, Rented
+computer, Rented
+computer, Rented
+game, Returned
+computer, Rented
+computer, Rented
+computer, Rented
+computer, Rented
+book, Rented
+computer, Rented
+game, Returned
+computer, Returned
+game, Returned
+game, Returned
+game, Returned
+game, Returned
+computer, Returned
+computer, Rented
+computer, Rented
+movie, Rented
+book, Rented
+computer, Returned
